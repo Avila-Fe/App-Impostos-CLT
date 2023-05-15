@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/item_payment"
+        android:title="@string/holerite"
+        android:icon="@drawable/baseline_paid_24"/>
+    <item
+        android:id="@+id/item_vacation"
+        android:title="@string/ferias"
+        android:icon="@drawable/baseline_beach_access_24"/>
+    <item
+        android:id="@+id/item_salary_bonus"
+        android:title="@string/_13_salario"
+        android:icon="@drawable/baseline_request_page_24"/>
+
+</menu>

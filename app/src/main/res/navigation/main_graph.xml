@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_graph"
+    app:startDestination="@id/item_payment">
+
+    <fragment
+        android:id="@+id/item_payment"
+        android:name="com.example.trabalhador.view.PaymentFragment"
+        android:label="fragment_payment"
+        tools:layout="@layout/fragment_payment" />
+    <fragment
+        android:id="@+id/item_vacation"
+        android:name="com.example.trabalhador.view.VacationFragment"
+        android:label="fragment_vacation"
+        tools:layout="@layout/fragment_vacation" />
+    <fragment
+        android:id="@+id/item_salary_bonus"
+        android:name="com.example.trabalhador.view.SalaryBonusFragment"
+        android:label="fragment_salary_bonus"
+        tools:layout="@layout/fragment_salary_bonus" />
+
+</navigation>
