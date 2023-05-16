@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/bg_bottom_bar"
         app:elevation="0dp"
-        app:itemActiveIndicatorStyle="@color/white"
+        app:itemActiveIndicatorStyle="@style/CardView"
         app:itemIconSize="32dp"
         app:itemIconTint="@drawable/item_selector"
         app:itemTextColor="@color/black"
