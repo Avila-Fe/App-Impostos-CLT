@@ -13,14 +13,15 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
         android:hint="Salário Base"
+        app:endIconMode="clear_text"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:startIconDrawable="@drawable/baseline_monetization_on_24"
-        app:endIconMode="clear_text">
+        app:startIconDrawable="@drawable/baseline_monetization_on_24">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/textInputEditText_salary"
@@ -35,20 +36,22 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-
         android:layout_marginEnd="32dp"
         android:hint="Dias Trabalhados"
+        app:endIconMode="clear_text"
+
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textInputLayout_salary"
-        app:startIconDrawable="@drawable/baseline_calendar_today_24"
-        app:endIconMode="clear_text">
+        app:startIconDrawable="@drawable/baseline_calendar_today_24">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/textInputEditText_day"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="numberDecimal" />
+            android:layout_height="56dp"
+            android:inputType="number"
+            android:maxLength="2" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -60,11 +63,12 @@
 
         android:layout_marginEnd="32dp"
         android:hint="Descontos"
+        app:endIconMode="clear_text"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textInputLayout_days"
-        app:startIconDrawable="@drawable/baseline_arrow_circle_down_24"
-        app:endIconMode="clear_text">
+        app:startIconDrawable="@drawable/baseline_arrow_circle_down_24">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/textInputEditText_discount"
@@ -79,14 +83,14 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-
         android:layout_marginEnd="32dp"
         android:hint="Proventos"
+        app:endIconMode="clear_text"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textInputLayout_discount"
-        app:startIconDrawable="@drawable/baseline_arrow_circle_up_24"
-        app:endIconMode="clear_text">
+        app:startIconDrawable="@drawable/baseline_arrow_circle_up_24">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/textInputEditText_earnings"
@@ -101,102 +105,104 @@
         android:layout_height="wrap_content"
         android:text="CALCULAR"
         android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textInputLayout_earnings"/>
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textInputLayout_earnings" />
 
     <TextView
         android:id="@+id/text_valueBase"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
         android:text="Valor Base: "
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="32dp"
-        app:layout_constraintTop_toBottomOf="@id/button_calculatePayment"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toStartOf="@id/text_valueInss"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button_calculatePayment" />
     <TextView
-        android:id="@+id/text_valueB"
+        android:id="@+id/text_vBase"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="R$ 0,00"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@id/button_calculatePayment"
-        app:layout_constraintStart_toEndOf="@id/text_valueBase" />
+        app:layout_constraintEnd_toEndOf="@id/text_valueBase"
+        app:layout_constraintStart_toStartOf="@id/text_valueBase"
+        app:layout_constraintTop_toBottomOf="@id/text_valueBase" />
 
     <TextView
         android:id="@+id/text_valueInss"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Valor INSS: "
-        android:layout_marginTop="8dp"
-        android:layout_marginStart="32dp"
-        app:layout_constraintTop_toBottomOf="@id/text_valueBase"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:layout_marginTop="36dp"
+        android:text="INSS: "
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/text_valueBase"
+        app:layout_constraintTop_toBottomOf="@id/button_calculatePayment" />
     <TextView
-        android:id="@+id/text_Inss"
+        android:id="@+id/text_vInss"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:text="R$ 0,00"
-        app:layout_constraintStart_toEndOf="@id/text_valueInss"
-        app:layout_constraintTop_toBottomOf="@id/text_valueB" />
-
-    <TextView
-        android:id="@+id/text_valueFgts"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Valor FGTS: "
-        android:layout_marginTop="8dp"
-        android:layout_marginStart="32dp"
-        app:layout_constraintTop_toBottomOf="@id/text_valueInss"
-        app:layout_constraintStart_toStartOf="parent" />
-    <TextView
-        android:id="@+id/text_fgts"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="R$ 0,00"
-        app:layout_constraintStart_toEndOf="@id/text_valueFgts"
-        app:layout_constraintTop_toBottomOf="@id/text_Inss" />
+        app:layout_constraintEnd_toEndOf="@id/text_valueInss"
+        app:layout_constraintStart_toStartOf="@id/text_valueInss"
+        app:layout_constraintTop_toBottomOf="@id/text_valueInss" />
 
     <TextView
         android:id="@+id/text_valueIrpf"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Valor IRPF: "
-        android:layout_marginTop="8dp"
-        android:layout_marginStart="32dp"
-        app:layout_constraintTop_toBottomOf="@id/text_valueFgts"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:layout_marginTop="84dp"
+        android:text="IRRF:"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="@id/text_valueBase"
+        app:layout_constraintStart_toStartOf="@id/text_valueBase"
+        app:layout_constraintTop_toBottomOf="@id/button_calculatePayment" />
     <TextView
-        android:id="@+id/text_Irpf"
+        android:id="@+id/text_vIrpf"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:text="R$ 0,00"
-        app:layout_constraintStart_toEndOf="@id/text_valueIrpf"
-        app:layout_constraintTop_toBottomOf="@id/text_fgts" />
+        app:layout_constraintEnd_toEndOf="@id/text_valueIrpf"
+        app:layout_constraintStart_toStartOf="@id/text_valueIrpf"
+        app:layout_constraintTop_toBottomOf="@id/text_valueIrpf" />
+
+    <TextView
+        android:id="@+id/text_valueFgts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="84dp"
+        android:text="FGTS: "
+        app:layout_constraintEnd_toEndOf="@id/text_valueInss"
+        app:layout_constraintStart_toStartOf="@id/text_valueInss"
+        app:layout_constraintTop_toBottomOf="@id/button_calculatePayment" />
+    <TextView
+        android:id="@+id/text_vFgts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="R$ 0,00"
+        app:layout_constraintEnd_toEndOf="@id/text_valueFgts"
+        app:layout_constraintStart_toStartOf="@id/text_valueFgts"
+        app:layout_constraintTop_toBottomOf="@id/text_valueFgts" />
 
     <TextView
         android:id="@+id/text_totalValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginBottom="88dp"
+        android:layout_marginStart="82dp"
+        android:layout_marginBottom="48dp"
         android:text="Valor Líquido: "
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
     <TextView
         android:id="@+id/text_totalSalary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="42dp"
         android:text="R$ 0,00"
         android:textColor="@color/green"
         android:textSize="32sp"
-        app:layout_constraintStart_toEndOf="@id/text_totalValue"
-        app:layout_constraintTop_toBottomOf="@id/text_Irpf" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/text_totalValue" />
 </androidx.constraintlayout.widget.ConstraintLayout>
