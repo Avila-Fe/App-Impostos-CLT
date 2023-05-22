@@ -36,11 +36,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
         android:hint="Dias Trabalhados"
         app:endIconMode="clear_text"
-
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/textInputLayout_dependents"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textInputLayout_salary"
@@ -48,6 +46,29 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/textInputEditText_day"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:inputType="number"
+            android:maxLength="2" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout_dependents"
+        style="@style/Widget.Material3.TextInputEditText.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:hint="Nº Dependentes"
+        app:endIconMode="clear_text"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@id/textInputLayout_days"
+        app:layout_constraintTop_toBottomOf="@id/textInputLayout_salary"
+        app:startIconDrawable="@drawable/baseline_people_outline_24">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/textInputEditText_dependents"
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:inputType="number"

@@ -45,6 +45,7 @@ class PaymentFragment : Fragment() {
             val workDays = binding.textInputEditTextDay.text.toString().toInt()
             val earnings = binding.textInputEditTextEarnings.text.toString().toFloat()
             val discount = binding.textInputEditTextDiscount.text.toString().toFloat()
+            val dependents = binding.textInputEditTextDependents.text.toString().toInt()
 
 
             val totalFgts = (((salary / 30) * workDays) + earnings) * 0.08f
@@ -53,7 +54,7 @@ class PaymentFragment : Fragment() {
             val totalInss = calculateInss(salary, workDays, earnings)
             binding.textVInss.text = "R$ ${"%.2f".format(totalInss)}"
 
-            val totalIrpf = calculateIrpf(salary, workDays, totalInss)
+            val totalIrpf = calculateIrpf(salary, workDays, earnings, dependents)
             binding.textVIrpf.text = "R$ ${"%.2f".format(totalIrpf)}"
 
             val totalBase = (salary / 30) * workDays
@@ -71,10 +72,10 @@ class PaymentFragment : Fragment() {
         val valueBase: Float = ((salary / 30) * workDays) + earnings
         var valueInss = 0f
 
-        if (valueBase <= 1302f) {
+        if (valueBase <= 1320f) {
             valueInss = valueBase * 0.075f
-        } else if (valueBase > 1302f && valueBase <= 2571.30f) {
-            valueInss = (valueBase * 0.09f) - 19.530f
+        } else if (valueBase > 1320f && valueBase <= 2571.30f) {
+            valueInss = (valueBase * 0.09f) - 19.800f
         } else if (valueBase > 2571.30f && valueBase <= 3856.94f) {
             valueInss = (valueBase * 0.12f) - 96.668f
         } else if (valueBase > 3856.94f && valueBase <= 7507.49f) {
@@ -84,23 +85,26 @@ class PaymentFragment : Fragment() {
         return valueInss
     }
 
-    private fun calculateIrpf(salary: Float, workDays: Int, earnings: Float): Float {
+    private fun calculateIrpf(salary: Float, workDays: Int, earnings: Float, dependents: Int, ): Float {
 
         val valueBase: Float =
             (((salary / 30) * workDays) + earnings) - calculateInss(salary, workDays, earnings)
         var valueIrpf = 0f
+        var valueDepents = dependents * 189.59f
 
         if (valueBase > 2112.01f && valueBase <= 2826.65f) {
-            valueIrpf = ((valueBase * 0.075f) - 158.40f)
+            valueIrpf = ((valueBase * 0.075f) - 158.40f) - valueDepents
         } else if (valueBase > 2826.66f && valueBase <= 3751.05f) {
-            valueIrpf = ((valueBase * 0.15f) - 370.40f)
+            valueIrpf = ((valueBase * 0.15f) - 370.40f) - valueDepents
         } else if (valueBase > 3751.06f && valueBase <= 4664.68f) {
-            valueIrpf = ((valueBase * 0.225f) - 651.73f)
+            valueIrpf = ((valueBase * 0.225f) - 651.73f) - valueDepents
         } else if (valueBase >= 4664.68) {
-            valueIrpf = ((valueBase * 0.225f) - 884.96f)
+            valueIrpf = ((valueBase * 0.225f) - 884.96f) - valueDepents
         }
 
-        return valueIrpf
+        return if (valueIrpf >= 0f) valueIrpf
+               else 0f
+
     }
 
     private fun validOk(): Boolean = (
@@ -109,6 +113,9 @@ class PaymentFragment : Fragment() {
                     binding.textInputEditTextDay.text.toString() != "" &&
                     binding.textInputEditTextDay.text.toString().toInt() <= 30 &&
                     binding.textInputEditTextDay.text.toString().toInt() >= 1 &&
+                    binding.textInputEditTextDependents.text.toString() != "" &&
+                    binding.textInputEditTextDependents.text.toString().toInt() >= 0 &&
                     binding.textInputEditTextEarnings.text.toString() != "" &&
                     binding.textInputEditTextDiscount.text.toString() != "")
+
 }
