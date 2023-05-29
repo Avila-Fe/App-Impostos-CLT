@@ -39,7 +39,6 @@
         android:hint="Dias Trabalhados"
         app:endIconMode="clear_text"
         app:layout_constraintEnd_toStartOf="@id/textInputLayout_dependents"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textInputLayout_salary"
         app:startIconDrawable="@drawable/baseline_calendar_today_24">
@@ -62,7 +61,6 @@
         app:endIconMode="clear_text"
 
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@id/textInputLayout_days"
         app:layout_constraintTop_toBottomOf="@id/textInputLayout_salary"
         app:startIconDrawable="@drawable/baseline_people_outline_24">

@@ -8,6 +8,7 @@ import android.view.View.OnClickListener
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.example.trabalhador.R
 import com.example.trabalhador.R.id.button_calculatePayment
@@ -20,11 +21,7 @@ class PaymentFragment : Fragment() {
     private lateinit var viewModel: PaymentViewModel
 
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?, ): View {
         // val view = inflater.inflate(R.layout.fragment_payment, container, false)
         binding = FragmentPaymentBinding.inflate(layoutInflater)
 
@@ -61,6 +58,7 @@ class PaymentFragment : Fragment() {
             binding.textVBase.text = "R$ ${"%.2f".format(totalBase)}"
 
             val salaryLiquid = (totalBase - discount - totalInss - totalIrpf) + earnings
+            handlerBalance(salaryLiquid)
             binding.textTotalSalary.text = "R$ ${"%.2f".format(salaryLiquid)}"
         } else {
             Toast.makeText(context, R.string.validation_fields, Toast.LENGTH_SHORT).show()
@@ -103,8 +101,16 @@ class PaymentFragment : Fragment() {
         }
 
         return if (valueIrpf >= 0f) valueIrpf
-               else 0f
+        else 0f
 
+    }
+
+    private fun handlerBalance(value: Float) {
+        if (value <= 0) {
+            binding.textTotalSalary.setTextColor(resources.getColor(R.color.red))
+        } else if (value > 0) {
+            binding.textTotalSalary.setTextColor(resources.getColor(R.color.green))
+        }
     }
 
     private fun validOk(): Boolean = (
