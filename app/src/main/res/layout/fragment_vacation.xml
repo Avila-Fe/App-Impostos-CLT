@@ -15,6 +15,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
+        app:endIconMode="clear_text"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -34,9 +35,10 @@
         android:layout_height="wrap_content"
         android:hint="Dias de Férias"
         android:layout_marginStart="32dp"
+        app:endIconMode="clear_text"
         app:layout_constraintTop_toBottomOf="@id/textInputLayout_salary"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/textInputLayout_daysSale"
+        app:layout_constraintEnd_toStartOf="@id/textInputLayout_dependent"
         app:startIconDrawable="@drawable/baseline_calendar_today_24">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -48,24 +50,68 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout_daysSale"
+        android:id="@+id/textInputLayout_dependent"
         style="@style/Widget.Material3.TextInputEditText.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Dias Vendidos"
+        android:hint="Nº Dependentes"
         android:layout_marginEnd="32dp"
+        app:endIconMode="clear_text"
         app:layout_constraintTop_toBottomOf="@id/textInputLayout_salary"
         app:layout_constraintStart_toEndOf="@id/textInputLayout_daysVacation"
         app:layout_constraintEnd_toEndOf="parent"
-        app:startIconDrawable="@drawable/baseline_payments_24">
+        app:startIconDrawable="@drawable/baseline_people_outline_24">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/textInputEditText_daySale"
+            android:id="@+id/textInputEditText_dependent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="number"
             android:maxLength="2"/>
     </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/text_daysSold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Vender 1/3 dos dias de Férias?"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textInputLayout_daysVacation">
+    </TextView>
+
+    <RadioGroup
+        android:id="@+id/radio_confirmartion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_daysSold">
+
+        <RadioButton
+            android:id="@+id/radio_yes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Sim"
+            android:textSize="18sp"
+            />
+        <RadioButton
+            android:id="@+id/radio_not"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="15dp"
+            android:text="Não"
+            android:textSize="18sp"
+            />
+
+    </RadioGroup>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout_extraHour"
@@ -75,33 +121,14 @@
         android:hint="Média de Horas Extras e Proventos Mensais"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
-        app:layout_constraintTop_toBottomOf="@id/textInputLayout_daysSale"
+        app:endIconMode="clear_text"
+        app:layout_constraintTop_toBottomOf="@id/radio_confirmartion"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:startIconDrawable="@drawable/baseline_more_time_24">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/textInputEditText_extraHour"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="numberDecimal"/>
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout_dependents"
-        style="@style/Widget.Material3.TextInputEditText.OutlinedBox"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="Nº Dependentes"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        app:layout_constraintTop_toBottomOf="@id/textInputLayout_extraHour"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:startIconDrawable="@drawable/baseline_people_outline_24">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/textInputEditText_dependents"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"/>
@@ -116,7 +143,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textInputLayout_dependents" />
+        app:layout_constraintTop_toBottomOf="@id/textInputLayout_extraHour" />
 
     <TextView
         android:id="@+id/text_valueBase"
@@ -147,7 +174,7 @@
         app:layout_constraintStart_toEndOf="@id/text_valueBase"
         app:layout_constraintTop_toBottomOf="@id/button_calculatePayment" />
     <TextView
-        android:id="@+id/text_vInss"
+        android:id="@+id/text_vExtra"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="R$ 0,00"
@@ -184,7 +211,7 @@
         app:layout_constraintStart_toStartOf="@id/text_advancePayment"
         app:layout_constraintTop_toBottomOf="@id/button_calculatePayment" />
     <TextView
-        android:id="@+id/text_vFgts"
+        android:id="@+id/text_vInss"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="R$ 0,00"
@@ -213,4 +240,5 @@
         android:textSize="32sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/text_totalValue" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

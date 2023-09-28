@@ -1,14 +1,225 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".view.SalaryBonusFragment">
 
-    <TextView
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout_salary"
+        style="@style/Widget.Material3.TextInputEditText.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Salário Base"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        app:endIconMode="clear_text"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:startIconDrawable="@drawable/baseline_monetization_on_24">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/textInputEditText_salary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout_daysVacation"
+        style="@style/Widget.Material3.TextInputEditText.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Dias de Férias"
+        android:layout_marginStart="32dp"
+        app:endIconMode="clear_text"
+        app:layout_constraintTop_toBottomOf="@id/textInputLayout_salary"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/textInputLayout_dependent"
+        app:startIconDrawable="@drawable/baseline_calendar_today_24">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/textInputEditText_dayVacation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:maxLength="2"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout_dependent"
+        style="@style/Widget.Material3.TextInputEditText.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Nº Dependentes"
+        android:layout_marginEnd="32dp"
+        app:endIconMode="clear_text"
+        app:layout_constraintTop_toBottomOf="@id/textInputLayout_salary"
+        app:layout_constraintStart_toEndOf="@id/textInputLayout_daysVacation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:startIconDrawable="@drawable/baseline_people_outline_24">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/textInputEditText_dependent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:maxLength="2"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout_extraHour"
+        style="@style/Widget.Material3.TextInputEditText.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Média de Horas Extras e Proventos Mensais"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        app:endIconMode="clear_text"
+        app:layout_constraintTop_toBottomOf="@id/textInputLayout_dependent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:startIconDrawable="@drawable/baseline_more_time_24">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/textInputEditText_extraHour"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/button_calculatePayment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="13º salario"
-        android:textSize="52sp"/>
+        android:text="CALCULAR"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textInputLayout_extraHour" />
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/text_valueInss"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:text="INSS: "
+        app:layout_constraintEnd_toStartOf="@id/text_valueIrpf"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button_calculatePayment" />
+    <TextView
+        android:id="@+id/text_vInss"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="R$ 0,00"
+        app:layout_constraintEnd_toEndOf="@id/text_valueInss"
+        app:layout_constraintStart_toStartOf="@id/text_valueInss"
+        app:layout_constraintTop_toBottomOf="@id/text_valueInss" />
+
+    <TextView
+        android:id="@+id/text_valueIrpf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:text="IRRF:  "
+        app:layout_constraintEnd_toEndOf="@id/text_valueFgts"
+        app:layout_constraintStart_toEndOf="@id/text_valueInss"
+        app:layout_constraintTop_toBottomOf="@id/button_calculatePayment" />
+    <TextView
+        android:id="@+id/text_vIrpf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="R$ 0,00"
+        app:layout_constraintEnd_toEndOf="@id/text_valueIrpf"
+        app:layout_constraintStart_toStartOf="@id/text_valueIrpf"
+        app:layout_constraintTop_toBottomOf="@id/text_valueIrpf" />
+
+    <TextView
+        android:id="@+id/text_valueFgts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:text="FGTS:  "
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/text_valueIrpf"
+        app:layout_constraintTop_toBottomOf="@id/button_calculatePayment" />
+    <TextView
+        android:id="@+id/text_vExtra"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="R$ 0,00"
+        app:layout_constraintEnd_toEndOf="@+id/text_valueFgts"
+        app:layout_constraintStart_toStartOf="@+id/text_valueFgts"
+        app:layout_constraintTop_toBottomOf="@+id/text_valueFgts" />
+
+    <TextView
+        android:id="@+id/text_totalValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="82dp"
+        android:layout_marginTop="52dp"
+        android:text="Parcela Única: "
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/text_vIrpf"
+        app:layout_constraintStart_toStartOf="parent" />
+    <TextView
+        android:id="@+id/text_totalSalary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="32dp"
+        android:text="R$ 0,00"
+        android:textColor="@color/green"
+        android:textSize="32sp"
+        app:layout_constraintTop_toBottomOf="@+id/text_vIrpf"
+        app:layout_constraintStart_toEndOf="@id/text_totalValue" />
+
+    <TextView
+        android:id="@+id/text_totalFirst"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:text="Primeira Parcela: "
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/text_totalValue"
+        app:layout_constraintTop_toBottomOf="@+id/text_totalValue"
+        app:layout_constraintStart_toStartOf="@+id/text_totalValue" />
+    <TextView
+        android:id="@+id/text_valueFirst"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="R$ 0,00"
+        android:textColor="@color/green"
+        android:textSize="32sp"
+        app:layout_constraintEnd_toEndOf="@+id/text_totalSalary"
+        app:layout_constraintTop_toBottomOf="@+id/text_totalSalary"
+        app:layout_constraintStart_toStartOf="@+id/text_totalSalary" />
+
+    <TextView
+        android:id="@+id/text_totalFirst"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:text="Primeira Parcela: "
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/text_totalValue"
+        app:layout_constraintTop_toBottomOf="@+id/text_totalValue"
+        app:layout_constraintStart_toStartOf="@+id/text_totalValue" />
+    <TextView
+        android:id="@+id/text_valueFirst"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="R$ 0,00"
+        android:textColor="@color/green"
+        android:textSize="32sp"
+        app:layout_constraintEnd_toEndOf="@+id/text_totalSalary"
+        app:layout_constraintTop_toBottomOf="@+id/text_totalSalary"
+        app:layout_constraintStart_toStartOf="@+id/text_totalSalary" />
+</androidx.constraintlayout.widget.ConstraintLayout>

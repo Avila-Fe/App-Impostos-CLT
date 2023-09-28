@@ -6,6 +6,8 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.example.trabalhador.databinding.ActivityMainBinding
+import com.example.trabalhador.viewModel.CalculationViewModel
+import com.example.trabalhador.viewModel.PaymentViewModel
 
 class MainActivity : AppCompatActivity() {
 
