@@ -149,7 +149,7 @@
         app:layout_constraintStart_toEndOf="@id/text_valueIrpf"
         app:layout_constraintTop_toBottomOf="@id/button_calculatePayment" />
     <TextView
-        android:id="@+id/text_vExtra"
+        android:id="@+id/text_vFgts"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="R$ 0,00"

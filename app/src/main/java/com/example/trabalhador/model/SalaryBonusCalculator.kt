@@ -7,18 +7,18 @@ class SalaryBonusCalculator {
         workMonth: Int,
         dependents: Int,
         extra: Float,
-    ): SalaryResult {
+    ): BonusResult {
 
         val totalBase = ((salary + extra) / 12) * workMonth
         val fgts = (salary + extra) * 0.08f
         val inss = calculateInss(totalBase)
         val irpf = calculateIrpf(totalBase, dependents)
 
-        val singlePayment = 0f
-        val firstPayment = 0f
-        val secondPayment = 0f
+        val singlePayment = totalBase - inss - irpf
+        val firstPayment = totalBase / 2
+        val secondPayment = totalBase - firstPayment - inss - irpf
 
-        return SalaryResult(fgts, inss, irpf, singlePayment, firstPayment, secondPayment)
+        return BonusResult(fgts, inss, irpf, singlePayment, firstPayment, secondPayment)
     }
 
     private fun calculateInss(salary: Float): Float {
@@ -61,7 +61,7 @@ class SalaryBonusCalculator {
 
 }
 
-data class SalaryResult(
+data class BonusResult(
     val fgts: Float, val inss: Float, val irpf: Float,
     val singlePayment: Float, val firstPayment: Float, val secondPayment: Float,
 )
