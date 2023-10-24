@@ -34,7 +34,7 @@ class SalaryBonusFragment : Fragment() {
         return binding.root
     }
 
-    fun calculate(){
+    private fun calculate(){
         if (validOk()){
             val salary = binding.textInputEditTextSalary.text.toString().toFloat()
             val monthWork = binding.textInputEditTextDayWork.text.toString().toInt()
