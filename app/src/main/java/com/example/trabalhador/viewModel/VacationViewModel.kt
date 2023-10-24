@@ -17,7 +17,7 @@ class VacationViewModel : ViewModel() {
         daysVacation: Int,
         extraValue: Float,
         dependents: Int,
-        hasSale: Boolean
+        hasSale: Int
     ) {
         val result = vacationCalculator.calculateVacation(salary, daysVacation, extraValue, dependents, hasSale)
         _vacationResult.value = result

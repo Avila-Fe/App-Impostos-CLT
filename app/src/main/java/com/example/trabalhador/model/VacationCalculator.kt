@@ -6,25 +6,18 @@ class VacationCalculator {
         daysVacation: Int,
         extraValue: Float,
         dependents: Int,
-        hasSale: Boolean,
+        hasSale: Int,
     ): VacationResult {
-        var baseSale = 0f
-        var baseSalary = (salary / 30) * daysVacation
 
-        if (hasSale) {
-            val daysSale = daysVacation / 3
-            baseSale = daysSale.toFloat() * baseSalary
-            baseSalary = (baseSalary * daysVacation) + baseSale
-        } else {
-            baseSalary *= daysVacation
-        }
-       // val salary = salary
-        val totalExtra = baseSale / 3
-        val inss = calculateInss(salary, totalExtra, extraValue)
-        val irpf = calculateIrpf(salary, totalExtra, dependents, extraValue)
-        val totalSalary = (baseSalary + totalExtra - inss - irpf)
+        val valueSale = verifySale(hasSale, daysVacation, salary)
+        val totalBase = valueSale + extraValue
+        val totalExtra = valueSale / 3
 
-        return VacationResult(baseSalary, totalExtra, inss, irpf, totalSalary)
+        val inss = calculateInss(totalBase, totalExtra, extraValue)
+        val irpf = calculateIrpf(totalBase, totalExtra, dependents, extraValue)
+        val salaryLiquid = (totalBase - inss - irpf) + totalExtra
+
+        return VacationResult(totalBase, totalExtra, inss, irpf, salaryLiquid)
     }
 
     private fun calculateInss(totalBase: Float, totalExtra: Float, extraValue: Float): Float {
@@ -64,6 +57,25 @@ class VacationCalculator {
         return if (valueIrpf >= 0f) valueIrpf
         else 0f
 
+    }
+
+    private fun verifySale(hasSale: Int, daysVacation: Int, salary: Float): Float{
+        val daysSale:Int
+        val baseSale:Float
+
+        // var daysBaseSalary = 0
+        var baseSalary = salary / 30
+
+        if (hasSale == 1) {
+            daysSale = daysVacation / 3
+            baseSale = daysSale.toFloat() * baseSalary
+
+            baseSalary = (baseSalary * daysVacation) + baseSale
+        } else {
+            baseSalary *= daysVacation
+        }
+
+        return baseSalary
     }
 }
 

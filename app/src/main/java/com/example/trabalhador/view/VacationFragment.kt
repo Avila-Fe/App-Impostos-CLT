@@ -17,10 +17,7 @@ class VacationFragment : Fragment() {
 
     private lateinit var binding: FragmentVacationBinding
     private lateinit var viewModel: VacationViewModel
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?,
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?,
     ): View {
         binding = FragmentVacationBinding.inflate(layoutInflater)
         viewModel = ViewModelProvider(this)[VacationViewModel::class.java]
@@ -42,15 +39,15 @@ class VacationFragment : Fragment() {
         val daysVacationText = binding.textInputEditTextDayVacation.text.toString()
         val extraValueText = binding.textInputEditTextExtraHour.text.toString()
         val dependentsText = binding.textInputEditTextDependent.text.toString()
-        val hasSale = binding.radioYes.isChecked
 
-        if (validOk(salaryText, daysVacationText, extraValueText, dependentsText)) {
+        if (validOk()) {
             val salary = salaryText.toFloat()
             val daysVacation = daysVacationText.toInt()
             val extraValue = extraValueText.toFloat()
             val dependents = dependentsText.toInt()
+            val hasSale = verifySale()
 
-            viewModel.calculateVacation(salary, daysVacation, extraValue, dependents, hasSale)
+           viewModel.calculateVacation(salary, daysVacation, extraValue, dependents, hasSale)
 
         } else {
             Toast.makeText(context, R.string.validation_fields, Toast.LENGTH_SHORT).show()
@@ -67,6 +64,10 @@ class VacationFragment : Fragment() {
         handlerBalance(vacationResult.totalSalary)
     }
 
+    private fun verifySale(): Int{
+        return if (binding.radioYes.isChecked) 1 else 0
+    }
+
     private fun handlerBalance(value: Float) {
         if (value <= 0) {
             binding.textTotalSalary.setTextColor(resources.getColor(R.color.red))
@@ -75,19 +76,14 @@ class VacationFragment : Fragment() {
         }
     }
 
-    private fun validOk(
-        salaryText: String,
-        daysVacationText: String,
-        extraValueText: String,
-        dependentsText: String,
-    ): Boolean {
-        return (salaryText.isNotEmpty() &&
-                salaryText.toFloat() != 0f &&
-                daysVacationText.isNotEmpty() &&
-                daysVacationText.toInt() >= 3 &&
-                daysVacationText.toInt() <= 30 &&
-                extraValueText.isNotEmpty() &&
-                extraValueText.toFloat() >= 0f &&
-                dependentsText.isNotEmpty())
-    }
+    private fun validOk(): Boolean = (
+            binding.textInputEditTextSalary.text.toString() != "" &&
+                    binding.textInputEditTextSalary.text.toString().toFloat() != 0f &&
+                    binding.textInputEditTextDayVacation.text.toString() != "" &&
+                    binding.textInputEditTextDayVacation.text.toString().toInt() <= 30 &&
+                    binding.textInputEditTextDayVacation.text.toString().toInt() >= 3 &&
+                    binding.textInputEditTextExtraHour.text.toString() != "" &&
+                    binding.textInputEditTextExtraHour.text.toString().toFloat() >= 0f &&
+                    binding.textInputEditTextDependent.text.toString() != "" &&
+                    binding.textInputEditTextDependent.text.toString().toInt() >= 0)
 }

@@ -29,11 +29,11 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout_daysVacation"
+        android:id="@+id/textInputLayout_daysWork"
         style="@style/Widget.Material3.TextInputEditText.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Dias de Férias"
+        android:hint="Meses Trabalhados"
         android:layout_marginStart="32dp"
         app:endIconMode="clear_text"
         app:layout_constraintTop_toBottomOf="@id/textInputLayout_salary"
@@ -42,7 +42,7 @@
         app:startIconDrawable="@drawable/baseline_calendar_today_24">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/textInputEditText_dayVacation"
+            android:id="@+id/textInputEditText_dayWork"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="number"
@@ -58,7 +58,7 @@
         android:layout_marginEnd="32dp"
         app:endIconMode="clear_text"
         app:layout_constraintTop_toBottomOf="@id/textInputLayout_salary"
-        app:layout_constraintStart_toEndOf="@id/textInputLayout_daysVacation"
+        app:layout_constraintStart_toEndOf="@id/textInputLayout_daysWork"
         app:layout_constraintEnd_toEndOf="parent"
         app:startIconDrawable="@drawable/baseline_people_outline_24">
 
@@ -202,24 +202,24 @@
         app:layout_constraintStart_toStartOf="@+id/text_totalSalary" />
 
     <TextView
-        android:id="@+id/text_totalFirst"
+        android:id="@+id/text_totalSecond"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="52dp"
-        android:text="Primeira Parcela: "
+        android:text="Segunda Parcela: "
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/text_totalValue"
-        app:layout_constraintTop_toBottomOf="@+id/text_totalValue"
-        app:layout_constraintStart_toStartOf="@+id/text_totalValue" />
+        app:layout_constraintEnd_toEndOf="@+id/text_totalFirst"
+        app:layout_constraintTop_toBottomOf="@+id/text_totalFirst"
+        app:layout_constraintStart_toStartOf="@+id/text_totalFirst" />
     <TextView
-        android:id="@+id/text_valueFirst"
+        android:id="@+id/text_valueSecond"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="R$ 0,00"
         android:textColor="@color/green"
         android:textSize="32sp"
-        app:layout_constraintEnd_toEndOf="@+id/text_totalSalary"
-        app:layout_constraintTop_toBottomOf="@+id/text_totalSalary"
-        app:layout_constraintStart_toStartOf="@+id/text_totalSalary" />
+        app:layout_constraintEnd_toEndOf="@+id/text_valueFirst"
+        app:layout_constraintTop_toBottomOf="@+id/text_valueFirst"
+        app:layout_constraintStart_toStartOf="@+id/text_valueFirst" />
 </androidx.constraintlayout.widget.ConstraintLayout>
