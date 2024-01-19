@@ -13,25 +13,34 @@ import com.example.trabalhador.databinding.FragmentVacationBinding
 import com.example.trabalhador.model.VacationResult
 import com.example.trabalhador.viewModel.VacationViewModel
 
-class VacationFragment : Fragment() {
+class VacationFragment : Fragment(R.layout.fragment_vacation) {
 
     private lateinit var binding: FragmentVacationBinding
     private lateinit var viewModel: VacationViewModel
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?,
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
     ): View {
-        binding = FragmentVacationBinding.inflate(layoutInflater)
         viewModel = ViewModelProvider(this)[VacationViewModel::class.java]
-
-        viewModel.vacationResult.observe(viewLifecycleOwner, Observer { result ->
-            updateValues(result)
-        })
-
-        binding.radioNot.isChecked = true
-        binding.buttonCalculatePayment.setOnClickListener {
-            calculateVacation()
-        }
-
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        initObservables()
+
+        with(binding) {
+            radioNot.isChecked = true
+            buttonCalculatePayment.setOnClickListener {
+                calculateVacation()
+            }
+        }
+    }
+
+    private fun initObservables() {
+        viewModel.vacationResult.observe(viewLifecycleOwner) { result ->
+            updateValues(result)
+        }
     }
 
     private fun calculateVacation() {
