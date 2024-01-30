@@ -15,30 +15,27 @@ import com.example.trabalhador.databinding.FragmentPaymentBinding
 import com.example.trabalhador.model.PaymentResult
 import com.example.trabalhador.viewModel.PaymentViewModel
 
-class PaymentFragment : Fragment() {
+class PaymentFragment : Fragment(R.layout.fragment_payment) {
 
     private lateinit var binding: FragmentPaymentBinding
     private lateinit var viewModel: PaymentViewModel
-
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View {
-        binding = FragmentPaymentBinding.inflate(layoutInflater)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?, ): View {
         viewModel = ViewModelProvider(this)[PaymentViewModel::class.java]
-
-        viewModel.paymentResult.observe(viewLifecycleOwner, Observer { result ->
-            updateValues(result)
-        })
-
-        binding.buttonCalculatePayment.setOnClickListener {
-            calculatePayment()
-        }
-
+        binding = FragmentPaymentBinding.inflate(layoutInflater)
 
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        initObservables()
+
+        with(binding) {
+            buttonCalculatePayment.setOnClickListener { calculatePayment() }
+        }
+    }
+
+    private fun initObservables() {
+        viewModel.paymentResult.observe(viewLifecycleOwner) { result -> updateValues(result) }
     }
 
     private fun calculatePayment() {
