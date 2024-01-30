@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.trabalhador.R
+import com.example.trabalhador.databinding.FragmentPaymentBinding
 import com.example.trabalhador.databinding.FragmentVacationBinding
 import com.example.trabalhador.model.VacationResult
 import com.example.trabalhador.viewModel.VacationViewModel
@@ -17,12 +18,9 @@ class VacationFragment : Fragment(R.layout.fragment_vacation) {
 
     private lateinit var binding: FragmentVacationBinding
     private lateinit var viewModel: VacationViewModel
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?, ): View {
         viewModel = ViewModelProvider(this)[VacationViewModel::class.java]
+        binding = FragmentVacationBinding.inflate(layoutInflater)
         return binding.root
     }
 
