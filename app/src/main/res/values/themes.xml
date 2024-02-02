@@ -6,4 +6,9 @@
     </style>
 
     <style name="Theme.Trabalhador" parent="Base.Theme.Trabalhador" />
+
+    <style name="Theme.Splash" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:statusBarColor">@color/green</item>
+        <item name="android:windowBackground">@drawable/splash</item>
+    </style>
 </resources>
