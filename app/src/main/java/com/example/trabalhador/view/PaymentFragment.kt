@@ -1,24 +1,26 @@
 package com.example.trabalhador.view
 
-import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.get
 import com.example.trabalhador.R
 import com.example.trabalhador.databinding.FragmentPaymentBinding
 import com.example.trabalhador.model.PaymentResult
+import com.example.trabalhador.util.KeyboardUtils
+import com.example.trabalhador.util.handlerUtils
 import com.example.trabalhador.viewModel.PaymentViewModel
 
-class PaymentFragment : Fragment(R.layout.fragment_payment) {
+class PaymentFragment() : Fragment(R.layout.fragment_payment) {
 
     private lateinit var binding: FragmentPaymentBinding
     private lateinit var viewModel: PaymentViewModel
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?, ): View {
         viewModel = ViewModelProvider(this)[PaymentViewModel::class.java]
         binding = FragmentPaymentBinding.inflate(layoutInflater)
@@ -30,7 +32,10 @@ class PaymentFragment : Fragment(R.layout.fragment_payment) {
         initObservables()
 
         with(binding) {
-            buttonCalculatePayment.setOnClickListener { calculatePayment() }
+            buttonCalculatePayment.setOnClickListener {
+                calculatePayment()
+                KeyboardUtils.hideKeyboard(this@PaymentFragment)
+            }
         }
     }
 
@@ -39,21 +44,14 @@ class PaymentFragment : Fragment(R.layout.fragment_payment) {
     }
 
     private fun calculatePayment() {
-        val salaryText = binding.textInputEditTextSalary.text.toString()
-        val workDaysText = binding.textInputEditTextDay.text.toString()
-        val earningsText = binding.textInputEditTextEarnings.text.toString()
-        val discountText = binding.textInputEditTextDiscount.text.toString()
-        val dependentsText = binding.textInputEditTextDependents.text.toString()
-
         if (validOk()) {
-            val salary = salaryText.toFloat()
-            val workDays = workDaysText.toInt()
-            val earnings = earningsText.toFloat()
-            val discount = discountText.toFloat()
-            val dependents = dependentsText.toInt()
+            val salary = binding.textInputEditTextSalary.text.toString().toFloat()
+            val workDays = binding.textInputEditTextDay.text.toString().toInt()
+            val earnings = binding.textInputEditTextEarnings.text.toString().toFloat()
+            val discount = binding.textInputEditTextDiscount.text.toString().toFloat()
+            val dependents = binding.textInputEditTextDependents.text.toString().toInt()
 
             viewModel.calculatePayment(salary, workDays, earnings, discount, dependents)
-
         } else {
             Toast.makeText(context, R.string.validation_fields, Toast.LENGTH_SHORT).show()
         }
@@ -67,15 +65,7 @@ class PaymentFragment : Fragment(R.layout.fragment_payment) {
         binding.textVBase.text = "R$ ${"%.2f".format(paymentResult.base)}"
         binding.textTotalSalary.text = "R$ ${"%.2f".format(paymentResult.totalSalary)}"
 
-        handlerBalance(paymentResult.totalSalary)
-    }
-
-    private fun handlerBalance(value: Float) {
-        if (value <= 0) {
-            binding.textTotalSalary.setTextColor(resources.getColor(R.color.red))
-        } else if (value > 0) {
-            binding.textTotalSalary.setTextColor(resources.getColor(R.color.green))
-        }
+        handlerUtils.handleBalance(binding.textTotalSalary, paymentResult.totalSalary)
     }
 
     private fun validOk(): Boolean = (

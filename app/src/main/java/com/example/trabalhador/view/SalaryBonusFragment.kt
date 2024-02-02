@@ -13,6 +13,8 @@ import com.example.trabalhador.R
 import com.example.trabalhador.databinding.FragmentPaymentBinding
 import com.example.trabalhador.databinding.FragmentSalaryBonusBinding
 import com.example.trabalhador.model.BonusResult
+import com.example.trabalhador.util.KeyboardUtils
+import com.example.trabalhador.util.handlerUtils
 import com.example.trabalhador.viewModel.SalaryBonusViewModel
 
 class SalaryBonusFragment : Fragment(R.layout.fragment_salary_bonus) {
@@ -28,7 +30,10 @@ class SalaryBonusFragment : Fragment(R.layout.fragment_salary_bonus) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         initObservables()
         with(binding) {
-            buttonCalculatePayment.setOnClickListener { calculate() }
+            buttonCalculatePayment.setOnClickListener {
+                calculate()
+                KeyboardUtils.hideKeyboard(this@SalaryBonusFragment)
+            }
         }
     }
 

@@ -12,6 +12,8 @@ import com.example.trabalhador.R
 import com.example.trabalhador.databinding.FragmentPaymentBinding
 import com.example.trabalhador.databinding.FragmentVacationBinding
 import com.example.trabalhador.model.VacationResult
+import com.example.trabalhador.util.KeyboardUtils
+import com.example.trabalhador.util.handlerUtils
 import com.example.trabalhador.viewModel.VacationViewModel
 
 class VacationFragment : Fragment(R.layout.fragment_vacation) {
@@ -31,6 +33,7 @@ class VacationFragment : Fragment(R.layout.fragment_vacation) {
             radioNot.isChecked = true
             buttonCalculatePayment.setOnClickListener {
                 calculateVacation()
+                KeyboardUtils.hideKeyboard(this@VacationFragment)
             }
         }
     }
@@ -42,24 +45,19 @@ class VacationFragment : Fragment(R.layout.fragment_vacation) {
     }
 
     private fun calculateVacation() {
-        val salaryText = binding.textInputEditTextSalary.text.toString()
-        val daysVacationText = binding.textInputEditTextDayVacation.text.toString()
-        val extraValueText = binding.textInputEditTextExtraHour.text.toString()
-        val dependentsText = binding.textInputEditTextDependent.text.toString()
-
         if (validOk()) {
-            val salary = salaryText.toFloat()
-            val daysVacation = daysVacationText.toInt()
-            val extraValue = extraValueText.toFloat()
-            val dependents = dependentsText.toInt()
+            val salary = binding.textInputEditTextSalary.text.toString().toFloat()
+            val daysVacation = binding.textInputEditTextDayVacation.text.toString().toInt()
+            val extraValue = binding.textInputEditTextExtraHour.text.toString().toFloat()
+            val dependents = binding.textInputEditTextDependent.text.toString().toInt()
             val hasSale = verifySale()
 
            viewModel.calculateVacation(salary, daysVacation, extraValue, dependents, hasSale)
-
         } else {
             Toast.makeText(context, R.string.validation_fields, Toast.LENGTH_SHORT).show()
         }
     }
+
 
     private fun updateValues(vacationResult: VacationResult) {
         binding.textVBase.text = "R$ ${"%.2f".format(vacationResult.base)}"
@@ -67,20 +65,10 @@ class VacationFragment : Fragment(R.layout.fragment_vacation) {
         binding.textVInss.text = "R$ ${"%.2f".format(vacationResult.inss)}"
         binding.textVIrpf.text = "R$ ${"%.2f".format(vacationResult.irpf)}"
         binding.textTotalSalary.text = "R$ ${"%.2f".format(vacationResult.totalSalary)}"
-
-        handlerBalance(vacationResult.totalSalary)
     }
 
     private fun verifySale(): Int{
         return if (binding.radioYes.isChecked) 1 else 0
-    }
-
-    private fun handlerBalance(value: Float) {
-        if (value <= 0) {
-            binding.textTotalSalary.setTextColor(resources.getColor(R.color.red))
-        } else if (value > 0) {
-            binding.textTotalSalary.setTextColor(resources.getColor(R.color.green))
-        }
     }
 
     private fun validOk(): Boolean = (
