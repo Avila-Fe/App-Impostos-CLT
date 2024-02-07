@@ -1,10 +1,14 @@
-package com.example.trabalhador.model
+package com.example.trabalhador.usecase
 
-class PaymentCalculator {
+import com.example.trabalhador.model.PaymentCalculatorUseCase
+import com.example.trabalhador.model.PaymentResult
+import javax.inject.Inject
 
-    fun calculatePayment(
-        salary: Float, workDays: Int, earnings: Float,
-        discount: Float, dependents: Int,
+class PaymentCalculator @Inject constructor() : PaymentCalculatorUseCase {
+
+    override fun calculatePayment(
+    salary: Float, workDays: Int, earnings: Float,
+    discount: Float, dependents: Int,
     ): PaymentResult {
         val salary = salary
         val totalBase = ((salary / 30) * workDays) + earnings
@@ -15,7 +19,6 @@ class PaymentCalculator {
 
         return PaymentResult(fgts, inss, irpf, totalBase, salaryLiquid)
     }
-
     private fun calculateInss(salary: Float, workDays: Int, earnings: Float): Float {
 
         val valueBase: Float = ((salary / 30) * workDays) + earnings
@@ -57,6 +60,3 @@ class PaymentCalculator {
 
     }
 }
-
-data class PaymentResult(val fgts: Float, val inss: Float, val irpf: Float,
-                         val base: Float, val totalSalary: Float)

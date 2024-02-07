@@ -3,12 +3,15 @@ package com.example.trabalhador.viewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.trabalhador.model.PaymentCalculator
+import com.example.trabalhador.core.FragmentScope
+import com.example.trabalhador.model.PaymentCalculatorUseCase
 import com.example.trabalhador.model.PaymentResult
+import javax.inject.Inject
 
-class PaymentViewModel: ViewModel() {
-
-    private val paymentCalculator = PaymentCalculator()
+@FragmentScope
+class PaymentViewModel @Inject constructor(
+    private val paymentCalculatorUseCase: PaymentCalculatorUseCase
+): ViewModel() {
 
     private val _paymentResult = MutableLiveData<PaymentResult>()
     val paymentResult: LiveData<PaymentResult> get() = _paymentResult
@@ -16,7 +19,7 @@ class PaymentViewModel: ViewModel() {
     fun calculatePayment(salary: Float, workDays: Int, earnings: Float,
                          discount: Float, dependents: Int
     ){
-       val result = paymentCalculator.calculatePayment(salary, workDays, earnings, discount, dependents)
+       val result = paymentCalculatorUseCase.calculatePayment(salary, workDays, earnings, discount, dependents)
         _paymentResult.value = result
     }
 }

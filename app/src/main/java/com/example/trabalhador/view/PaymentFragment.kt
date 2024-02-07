@@ -1,6 +1,7 @@
 package com.example.trabalhador.view
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,16 +11,25 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
+import com.example.trabalhador.CltApplication
 import com.example.trabalhador.R
 import com.example.trabalhador.databinding.FragmentPaymentBinding
 import com.example.trabalhador.model.PaymentResult
 import com.example.trabalhador.viewModel.PaymentViewModel
+import javax.inject.Inject
 
 class PaymentFragment : Fragment() {
 
-    private lateinit var binding: FragmentPaymentBinding
-    private lateinit var viewModel: PaymentViewModel
+    @Inject
+    lateinit var viewModel: PaymentViewModel
 
+    private lateinit var binding: FragmentPaymentBinding
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+        (requireActivity().application as CltApplication).appComponent.inject(this)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,

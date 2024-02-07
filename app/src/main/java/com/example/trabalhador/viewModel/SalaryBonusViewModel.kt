@@ -4,8 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.trabalhador.model.BonusResult
-import com.example.trabalhador.model.PaymentCalculator
-import com.example.trabalhador.model.PaymentResult
 import com.example.trabalhador.model.SalaryBonusCalculator
 
 class SalaryBonusViewModel: ViewModel(){
